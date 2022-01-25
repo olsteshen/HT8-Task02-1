@@ -3,6 +3,7 @@ package com.example.java;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
@@ -14,6 +15,11 @@ public class Book {
         Random random = new Random();
         name = RandomStringUtils.randomAlphabetic(3, 11);
         price = random.nextInt(99);
+    }
+
+    public Book(String name, Integer price) {
+        this.name = name;
+        this.price = price;
     }
 
     public String getName() {
@@ -73,7 +79,7 @@ public class Book {
 
     //print book name with the highest price
     public void getHighestPricedBook(List<Book> books) {
-        List<Book> bookList = new ArrayList<Book>(books);
+        List<Book> bookList = new ArrayList<>(books);
         Book expensiveBook = bookList
                 .stream()
                 .max(Comparator.comparing(Book::getPrice))
@@ -85,7 +91,7 @@ public class Book {
     public void getNumberOfBooksWith5Letters(List<Book> books) {
         List<Book> bookList = new ArrayList<>(books);
         Predicate<String> is5Letters = (str) -> str.length() == 5;
-        Long numberOfBooksWith5Letters = bookList
+        long numberOfBooksWith5Letters = bookList
                 .stream()
                 .map((book) -> book.name)
                 .filter(is5Letters)
@@ -106,18 +112,16 @@ public class Book {
     //sort books by name in desc order, if name equals then sort by price
     public void sortBooksByName(List<Book> books) {
         List<Book> bookList = new ArrayList<>(books);
-        List<String> sortedList = bookList
+        List<Book> sortedList = bookList
                 .stream()
-                .map((book) -> book.name.toUpperCase())
-                .sorted()
+                .map(book -> new Book(book.getName().toUpperCase(), book.getPrice()))
+                .sorted(new BookNameSorter())
                 .collect(Collectors.toList());
-        System.out.println("Sorted list of books: " + sortedList);
+            System.out.println("Sorted list of books: " + sortedList);
     }
-
     @Override
     public String toString() {
         return "name:" + name +
                 ", price:" + price;
     }
-
 }

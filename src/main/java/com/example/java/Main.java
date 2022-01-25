@@ -1,21 +1,21 @@
 package com.example.java;
 
 
-import java.util.List;
+import java.util.*;
 
 public class Main {
 
     public static void main(String[] args) {
+        //subtask 1
         Book book = new Book();
-        List<Book> listOfBooks = book.createListOfBooks(5);
-        System.out.println("Print all books: " + listOfBooks.toString());
-        book.getBooksNames(listOfBooks);
-        book.getTotalPrice(listOfBooks);
-        book.getBooksWithA(listOfBooks);
-        book.getHighestPricedBook(listOfBooks);
-        book.getNumberOfBooksWith5Letters(listOfBooks);
-        book.getBooksCheaperThan30(listOfBooks);
-        book.sortBooksByName(listOfBooks);
-
+        List<Book> listOfBooksRandom = book.createListOfBooks(5);
+        System.out.println('\n'+ "Print all random books: " + listOfBooksRandom.toString());
+        book.getBooksNames(listOfBooksRandom);
+        book.getTotalPrice(listOfBooksRandom);
+        book.getBooksWithA(listOfBooksRandom);
+        book.getHighestPricedBook(listOfBooksRandom);
+        book.getNumberOfBooksWith5Letters(listOfBooksRandom);
+        book.getBooksCheaperThan30(listOfBooksRandom);
+        book.sortBooksByName(listOfBooksRandom);
     }
 }
